@@ -30,7 +30,10 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/v1/auth/userDetails").hasRole("USER")
-                .anyRequest().permitAll()
+                .requestMatchers("/swagger-ui/**").permitAll()
+                .requestMatchers("/v3/api-docs/**").permitAll()
+                .requestMatchers("/h2-console/**").permitAll()
+                .anyRequest().authenticated()
         );
 
         http.addFilter(new AuthorizationFilter(authenticationManager, jwtService));

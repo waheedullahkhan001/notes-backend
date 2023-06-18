@@ -52,6 +52,7 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
                 log.error("Error in AuthorizationFilter: {}", e.getMessage(), e);
             }
         }
+
         super.doFilterInternal(request, response, chain);
     }
 }
