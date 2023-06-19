@@ -3,13 +3,10 @@ package com.cloud.notesbackend.endpoints;
 import com.cloud.notesbackend.requests.CreateNoteRequest;
 import com.cloud.notesbackend.responses.BasicResponse;
 import com.cloud.notesbackend.responses.GetAllNotesResponse;
-import com.cloud.notesbackend.responses.GetNoteResponse;
 import com.cloud.notesbackend.services.NoteService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
