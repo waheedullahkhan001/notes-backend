@@ -4,6 +4,7 @@ import com.cloud.notesbackend.requests.LoginRequest;
 import com.cloud.notesbackend.requests.RegistrationRequest;
 import com.cloud.notesbackend.responses.BasicResponse;
 import com.cloud.notesbackend.services.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,12 +17,12 @@ public class AuthenticationController {
     private final UserService userService;
 
     @PostMapping("/register")
-    public BasicResponse register(@RequestBody RegistrationRequest request) {
+    public BasicResponse register(@Valid @RequestBody RegistrationRequest request) {
         return userService.createUser(request);
     }
 
     @PostMapping("/login")
-    public BasicResponse login(@RequestBody LoginRequest request) {
+    public BasicResponse login(@Valid @RequestBody LoginRequest request) {
         return userService.authenticateUser(request);
     }
 

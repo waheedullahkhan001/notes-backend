@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class Application {
 
-    // TODO: Logs, Swagger for secure endpoints, Validation
+    // TODO: Swagger for secure endpoints
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
