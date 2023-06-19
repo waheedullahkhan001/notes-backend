@@ -26,9 +26,4 @@ public class AuthenticationController {
         return userService.authenticateUser(request);
     }
 
-    @GetMapping("/userDetails")
-    public BasicResponse getUserDetails() {
-        return new BasicResponse(true, "It works");
-    }
-
 }
