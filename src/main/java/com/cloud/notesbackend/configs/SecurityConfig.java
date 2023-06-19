@@ -4,6 +4,7 @@ package com.cloud.notesbackend.configs;
 import com.cloud.notesbackend.filters.AuthorizationFilter;
 import com.cloud.notesbackend.services.JwtService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -30,9 +31,9 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/v1/auth/userDetails").hasRole("USER")
+                .requestMatchers(PathRequest.toH2Console()).permitAll()
                 .requestMatchers("/swagger-ui/**").permitAll()
                 .requestMatchers("/v3/api-docs/**").permitAll()
-                .requestMatchers("/h2-console/**").permitAll()
                 .requestMatchers("/api/v1/auth/register").permitAll()
                 .requestMatchers("/api/v1/auth/login").permitAll()
                 .anyRequest().authenticated()
