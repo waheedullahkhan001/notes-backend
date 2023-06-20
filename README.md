@@ -2,20 +2,14 @@
 
 > Warning: This is a work in progress project.
 
-This is a notes backend made using the Spring Boot framework for Java.
+This is made using the Spring Boot framework for Java.
 
 This project makes use of the following:
 
-- H2 Database (In Memory)
+- H2 Database
 - Security (JWT)
 - Swagger
 
 ## ToDo:
 
-- Need to add logic for notes
-
-## Already done:
-
-- Basic Swagger
-- User register and Login
-- Basic Security
+- Testing
