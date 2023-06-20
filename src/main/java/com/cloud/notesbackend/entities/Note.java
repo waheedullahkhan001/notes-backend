@@ -22,3 +22,4 @@ public class Note {
     @ManyToOne
     private User user;
 }
+

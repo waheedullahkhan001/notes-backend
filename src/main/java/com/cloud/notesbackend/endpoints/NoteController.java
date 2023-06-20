@@ -1,6 +1,7 @@
 package com.cloud.notesbackend.endpoints;
 
 import com.cloud.notesbackend.requests.CreateNoteRequest;
+import com.cloud.notesbackend.requests.UpdateNoteRequest;
 import com.cloud.notesbackend.responses.BasicResponse;
 import com.cloud.notesbackend.responses.GetAllNotesResponse;
 import com.cloud.notesbackend.services.NoteService;
@@ -23,5 +24,10 @@ public class NoteController {
     @GetMapping("/all")
     public GetAllNotesResponse getAllNotes() {
         return noteService.getAllNotes();
+    }
+
+    @PutMapping("/update")
+    public BasicResponse updateNote(@Valid @RequestBody UpdateNoteRequest request) {
+        return noteService.updateNote(request);
     }
 }
