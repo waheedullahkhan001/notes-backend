@@ -4,7 +4,7 @@
 
 This is a notes backend made using the Spring Boot framework for Java.
 
-This project makes use of following:
+This project makes use of the following:
 
 - H2 Database (In Memory)
 - Security (JWT)
