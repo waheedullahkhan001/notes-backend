@@ -61,4 +61,19 @@ public class NoteService {
 
         return new BasicResponse(true, "Note updated successfully");
     }
+
+    public BasicResponse deleteNote(Long id) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userRepository.findUserByUsername(username);
+
+        Note note = noteRepository.findNoteByIdAndUser(id, user);
+
+        if (note == null) {
+            throw new BadRequestException("Note not found for this user");
+        }
+
+        noteRepository.delete(note);
+
+        return new BasicResponse(true, "Note deleted successfully");
+    }
 }

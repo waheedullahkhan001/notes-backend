@@ -30,4 +30,9 @@ public class NoteController {
     public BasicResponse updateNote(@Valid @RequestBody UpdateNoteRequest request) {
         return noteService.updateNote(request);
     }
+
+    @DeleteMapping("/delete/{id}")
+    public BasicResponse deleteNote(@PathVariable Long id) {
+        return noteService.deleteNote(id);
+    }
 }

@@ -19,7 +19,6 @@ public class RegistrationRequest {
     @Size(min = 8, max = 20, message = "Password must be between 8 and 20 characters")
     private String password;
 
-    // TODO: Use model mapper
     public User toUser() {
         User user = new User();
         user.setUsername(username);

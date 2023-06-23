@@ -30,12 +30,12 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManager authenticationManager) throws Exception {
 
         http.authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/v1/auth/userDetails").hasRole("USER")
                 .requestMatchers(PathRequest.toH2Console()).permitAll()
                 .requestMatchers("/swagger-ui/**").permitAll()
                 .requestMatchers("/v3/api-docs/**").permitAll()
                 .requestMatchers("/api/v1/auth/register").permitAll()
                 .requestMatchers("/api/v1/auth/login").permitAll()
+                .requestMatchers("/api/v1/auth/userDetails").hasRole("USER")
                 .anyRequest().authenticated()
         );
 
