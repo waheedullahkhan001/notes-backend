@@ -44,11 +44,11 @@ public class NoteService {
         ).toList());
     }
 
-    public BasicResponse updateNote(UpdateNoteRequest request) {
+    public BasicResponse updateNote(Long id, UpdateNoteRequest request) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepository.findUserByUsername(username);
 
-        Note note = noteRepository.findNoteByIdAndUser(request.getId(), user);
+        Note note = noteRepository.findNoteByIdAndUser(id, user);
 
         if (note == null) {
             throw new BadRequestException("Note not found for this user");
