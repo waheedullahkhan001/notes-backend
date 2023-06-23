@@ -15,4 +15,3 @@ This project makes use of the following:
 - Testing
 - Add unit testing
 - Shift to WebFlux
-- Add frontend
