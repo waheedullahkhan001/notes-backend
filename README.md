@@ -13,3 +13,6 @@ This project makes use of the following:
 ## ToDo:
 
 - Testing
+- Add unit testing
+- Shift to WebFlux
+- Add frontend
