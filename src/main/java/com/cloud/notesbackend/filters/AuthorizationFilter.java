@@ -1,5 +1,6 @@
 package com.cloud.notesbackend.filters;
 
+import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.cloud.notesbackend.services.JwtService;
 import jakarta.servlet.FilterChain;
@@ -48,8 +49,16 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
                         authorities);
 
                 SecurityContextHolder.getContext().setAuthentication(authToken);
-            } catch (Exception e) {
+            }
+            catch (TokenExpiredException e) {
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+                log.debug("Token expired: {}", e.getMessage());
+                return;
+            }
+            catch (Exception e) {
                 log.error("Error in AuthorizationFilter: {}", e.getMessage(), e);
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+                return;
             }
         }
 

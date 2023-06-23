@@ -26,12 +26,12 @@ public class NoteController {
         return noteService.getAllNotes();
     }
 
-    @PutMapping("/update")
-    public BasicResponse updateNote(@Valid @RequestBody UpdateNoteRequest request) {
-        return noteService.updateNote(request);
+    @PutMapping("/{id}")
+    public BasicResponse updateNote(@PathVariable Long id, @Valid @RequestBody UpdateNoteRequest request) {
+        return noteService.updateNote(id, request);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public BasicResponse deleteNote(@PathVariable Long id) {
         return noteService.deleteNote(id);
     }

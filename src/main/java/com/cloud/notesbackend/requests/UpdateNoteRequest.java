@@ -8,9 +8,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UpdateNoteRequest {
-
-    @NotBlank
-    private Long id;
     @NotBlank
     private String title;
     @NotNull
