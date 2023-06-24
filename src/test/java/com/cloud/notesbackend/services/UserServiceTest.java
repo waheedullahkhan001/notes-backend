@@ -7,7 +7,6 @@ import com.cloud.notesbackend.repositories.UserRepository;
 import com.cloud.notesbackend.requests.LoginRequest;
 import com.cloud.notesbackend.requests.RegistrationRequest;
 import com.cloud.notesbackend.responses.BasicResponse;
-import com.cloud.notesbackend.responses.LoginResponse;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;

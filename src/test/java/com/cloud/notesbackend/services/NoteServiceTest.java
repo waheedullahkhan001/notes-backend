@@ -9,7 +9,6 @@ import com.cloud.notesbackend.requests.UpdateNoteRequest;
 import com.cloud.notesbackend.responses.BasicResponse;
 import com.cloud.notesbackend.responses.GetAllNotesResponse;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
