@@ -12,6 +12,6 @@ This project makes use of the following:
 
 ## ToDo:
 
-- Testing
+- Store all constants separately
 - Add unit testing
 - Shift to WebFlux

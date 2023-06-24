@@ -49,13 +49,11 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
                         authorities);
 
                 SecurityContextHolder.getContext().setAuthentication(authToken);
-            }
-            catch (TokenExpiredException e) {
+            } catch (TokenExpiredException e) {
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
                 log.debug("Token expired: {}", e.getMessage());
                 return;
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 log.error("Error in AuthorizationFilter: {}", e.getMessage(), e);
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
                 return;
