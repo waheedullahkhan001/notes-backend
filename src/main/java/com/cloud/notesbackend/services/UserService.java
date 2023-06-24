@@ -38,7 +38,7 @@ public class UserService {
         return new BasicResponse(true, "User created successfully");
     }
 
-    public BasicResponse authenticateUser(LoginRequest request) {
+    public LoginResponse authenticateUser(LoginRequest request) {
         User user = userRepository.findUserByUsername(request.getUsername());
 
         if (user == null) {
@@ -50,8 +50,6 @@ public class UserService {
         }
 
         return new LoginResponse(
-                true,
-                "User authenticated successfully",
                 jwtService.generateToken(user.getUsername(), user.getRole())
         );
     }

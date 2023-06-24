@@ -28,7 +28,6 @@ import java.util.List;
 @ContextConfiguration
 class NoteServiceTest {
 
-
     @Autowired
     private NoteService noteService;
 
@@ -37,10 +36,6 @@ class NoteServiceTest {
 
     @MockBean
     private UserRepository userRepository;
-
-    @BeforeEach
-    void setUp() {
-    }
 
     @Test
     @WithMockUser
@@ -64,6 +59,7 @@ class NoteServiceTest {
         BasicResponse basicResponse = noteService.createNote(request);
 
         Assertions.assertTrue(basicResponse.getSuccess());
+        Assertions.assertEquals("Note created successfully", basicResponse.getMessage());
     }
 
     @Test
@@ -134,6 +130,7 @@ class NoteServiceTest {
         BasicResponse basicResponse = noteService.updateNote(1L, request);
 
         Assertions.assertTrue(basicResponse.getSuccess());
+        Assertions.assertEquals("Note updated successfully", basicResponse.getMessage());
     }
 
     @Test
@@ -151,6 +148,7 @@ class NoteServiceTest {
     }
 
     @Test
+    @WithMockUser
     void deleteNote_NoteDeleted() {
         Mockito.when(
                 noteRepository.findNoteByIdAndUserUsername(Mockito.anyLong(), Mockito.anyString())
@@ -161,6 +159,8 @@ class NoteServiceTest {
         Mockito.doNothing().when(noteRepository).delete(Mockito.any());
 
         BasicResponse basicResponse = noteService.deleteNote(1L);
+
         Assertions.assertTrue(basicResponse.getSuccess());
+        Assertions.assertEquals("Note deleted successfully", basicResponse.getMessage());
     }
 }

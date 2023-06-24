@@ -7,6 +7,7 @@ import com.cloud.notesbackend.repositories.UserRepository;
 import com.cloud.notesbackend.requests.LoginRequest;
 import com.cloud.notesbackend.requests.RegistrationRequest;
 import com.cloud.notesbackend.responses.BasicResponse;
+import com.cloud.notesbackend.responses.LoginResponse;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -19,7 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @RunWith(MockitoJUnitRunner.class)
 @SpringBootTest
-public class UserServiceTests {
+public class UserServiceTest {
 
     @Autowired
     private UserService userService;
@@ -62,7 +63,9 @@ public class UserServiceTests {
         request.setPassword("12345678");
 
         BasicResponse basicResponse = userService.createUser(request);
+
         Assertions.assertTrue(basicResponse.getSuccess());
+        Assertions.assertEquals("User created successfully", basicResponse.getMessage());
     }
 
 
@@ -130,8 +133,7 @@ public class UserServiceTests {
         request.setUsername("user");
         request.setPassword("12345678");
 
-        BasicResponse basicResponse = userService.authenticateUser(request);
-        Assertions.assertTrue(basicResponse.getSuccess());
+        Assertions.assertDoesNotThrow(() -> userService.authenticateUser(request));
     }
 
 }

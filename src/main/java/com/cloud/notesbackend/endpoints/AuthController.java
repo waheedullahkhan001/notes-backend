@@ -3,6 +3,7 @@ package com.cloud.notesbackend.endpoints;
 import com.cloud.notesbackend.requests.LoginRequest;
 import com.cloud.notesbackend.requests.RegistrationRequest;
 import com.cloud.notesbackend.responses.BasicResponse;
+import com.cloud.notesbackend.responses.LoginResponse;
 import com.cloud.notesbackend.services.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +26,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public BasicResponse login(@Valid @RequestBody LoginRequest request) {
+    public LoginResponse login(@Valid @RequestBody LoginRequest request) {
         return userService.authenticateUser(request);
     }
 
