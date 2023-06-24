@@ -2,7 +2,7 @@ package com.cloud.notesbackend.services;
 
 import com.cloud.notesbackend.entities.Note;
 import com.cloud.notesbackend.entities.User;
-import com.cloud.notesbackend.exceptions.BadRequestException;
+import com.cloud.notesbackend.exceptions.NotFoundException;
 import com.cloud.notesbackend.repositories.NoteRepository;
 import com.cloud.notesbackend.repositories.UserRepository;
 import com.cloud.notesbackend.requests.CreateNoteRequest;
@@ -23,6 +23,7 @@ public class NoteService {
     private final NoteRepository noteRepository;
     private final UserRepository userRepository;
 
+
     public BasicResponse createNote(CreateNoteRequest request) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepository.findUserByUsername(username);
@@ -39,6 +40,10 @@ public class NoteService {
 
         List<Note> notes = noteRepository.findAllByUserUsername(username);
 
+        if (notes == null) {
+            return new GetAllNotesResponse();
+        }
+
         return new GetAllNotesResponse(notes.stream().map(note ->
                 new GetNoteResponse(note.getId(), note.getTitle(), note.getContent())
         ).toList());
@@ -46,12 +51,10 @@ public class NoteService {
 
     public BasicResponse updateNote(Long id, UpdateNoteRequest request) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        User user = userRepository.findUserByUsername(username);
-
-        Note note = noteRepository.findNoteByIdAndUser(id, user);
+        Note note = noteRepository.findNoteByIdAndUserUsername(id, username);
 
         if (note == null) {
-            throw new BadRequestException("Note not found for this user");
+            throw new NotFoundException("Note not found for this user");
         }
 
         note.setTitle(request.getTitle());
@@ -64,12 +67,10 @@ public class NoteService {
 
     public BasicResponse deleteNote(Long id) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        User user = userRepository.findUserByUsername(username);
-
-        Note note = noteRepository.findNoteByIdAndUser(id, user);
+        Note note = noteRepository.findNoteByIdAndUserUsername(id, username);
 
         if (note == null) {
-            throw new BadRequestException("Note not found for this user");
+            throw new NotFoundException("Note not found for this user");
         }
 
         noteRepository.delete(note);
