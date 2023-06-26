@@ -9,35 +9,42 @@ import com.cloud.notesbackend.requests.UpdateNoteRequest;
 import com.cloud.notesbackend.responses.BasicResponse;
 import com.cloud.notesbackend.responses.GetAllNotesResponse;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.context.ContextConfiguration;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.List;
 
 
-@RunWith(MockitoJUnitRunner.class)
-@SpringBootTest
-@ContextConfiguration
+@ExtendWith(MockitoExtension.class)
 class NoteServiceTest {
 
-    @Autowired
+    @InjectMocks
     private NoteService noteService;
 
-    @MockBean
+    @Mock
     private NoteRepository noteRepository;
 
-    @MockBean
+    @Mock
     private UserRepository userRepository;
 
+    @BeforeAll
+    static void setUp() {
+        Authentication authentication = Mockito.mock(Authentication.class);
+        SecurityContext securityContext = Mockito.mock(SecurityContext.class);
+        Mockito.when(securityContext.getAuthentication()).thenReturn(authentication);
+        Mockito.when(authentication.getName()).thenReturn("user");
+        SecurityContextHolder.setContext(securityContext);
+    }
+
     @Test
-    @WithMockUser
     void createNote_NoteCreated() {
         Mockito.when(
                 userRepository.findUserByUsername(Mockito.anyString())
@@ -62,7 +69,6 @@ class NoteServiceTest {
     }
 
     @Test
-    @WithMockUser
     void getAllNotes_NotesReturned() {
         Mockito.when(
                 noteRepository.findAllByUserUsername(Mockito.anyString())
@@ -76,7 +82,6 @@ class NoteServiceTest {
     }
 
     @Test
-    @WithMockUser
     void getAllNotes_NotesNull() {
         Mockito.when(
                 noteRepository.findAllByUserUsername(Mockito.anyString())
@@ -90,7 +95,6 @@ class NoteServiceTest {
     }
 
     @Test
-    @WithMockUser
     void updateNote_NoteNotFound() {
         Mockito.when(
                 noteRepository.findNoteByIdAndUserUsername(Mockito.anyLong(), Mockito.anyString())
@@ -108,7 +112,6 @@ class NoteServiceTest {
     }
 
     @Test
-    @WithMockUser
     void updateNote_NoteUpdated() {
         Mockito.when(
                 noteRepository.findNoteByIdAndUserUsername(Mockito.anyLong(), Mockito.anyString())
@@ -133,7 +136,6 @@ class NoteServiceTest {
     }
 
     @Test
-    @WithMockUser
     void deleteNote_NoteNotFound() {
         Mockito.when(
                 noteRepository.findNoteByIdAndUserUsername(Mockito.anyLong(), Mockito.anyString())
@@ -147,7 +149,6 @@ class NoteServiceTest {
     }
 
     @Test
-    @WithMockUser
     void deleteNote_NoteDeleted() {
         Mockito.when(
                 noteRepository.findNoteByIdAndUserUsername(Mockito.anyLong(), Mockito.anyString())
