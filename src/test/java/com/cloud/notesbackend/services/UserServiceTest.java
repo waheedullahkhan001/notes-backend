@@ -82,7 +82,7 @@ public class UserServiceTest {
 
         NotFoundException exception = Assertions.assertThrows(
                 NotFoundException.class,
-                () -> userService.authenticateUser(request)
+                () -> userService.loginUser(request)
         );
         Assertions.assertEquals("User does not exist", exception.getMessage());
     }
@@ -105,7 +105,7 @@ public class UserServiceTest {
 
         BadRequestException exception = Assertions.assertThrows(
                 BadRequestException.class,
-                () -> userService.authenticateUser(request)
+                () -> userService.loginUser(request)
         );
         Assertions.assertEquals("Incorrect password", exception.getMessage());
     }
@@ -132,7 +132,7 @@ public class UserServiceTest {
         request.setUsername("user");
         request.setPassword("12345678");
 
-        Assertions.assertDoesNotThrow(() -> userService.authenticateUser(request));
+        Assertions.assertDoesNotThrow(() -> userService.loginUser(request));
     }
 
 }
