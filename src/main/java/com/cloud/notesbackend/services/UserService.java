@@ -38,7 +38,7 @@ public class UserService {
         return new BasicResponse(true, "User created successfully");
     }
 
-    public LoginResponse authenticateUser(LoginRequest request) {
+    public LoginResponse loginUser(LoginRequest request) {
         User user = userRepository.findUserByUsername(request.getUsername());
 
         if (user == null) {
