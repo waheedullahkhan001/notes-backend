@@ -28,6 +28,10 @@ public class NoteService {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepository.findUserByUsername(username);
 
+        if (user == null) {
+            throw new NotFoundException("User not found");
+        }
+
         Note note = request.toNote();
         note.setUser(user);
         noteRepository.save(note);
