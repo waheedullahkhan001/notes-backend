@@ -14,4 +14,4 @@ This project makes use of the following:
 
 - Testing
 - Store all constants separately
-- Shift to WebFlux
+- A lot more :)
